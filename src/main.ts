@@ -1,5 +1,45 @@
 
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Get references to all DOM elements
+    const configForm = document.getElementById('config-form') as HTMLFormElement;
+    const minInput = document.getElementById('min-chars') as HTMLInputElement;
+    const maxInput = document.getElementById('max-chars') as HTMLInputElement;
+    const startBtn = document.getElementById('start-btn') as HTMLButtonElement;
+    const appContainer = document.getElementById('app') as HTMLDivElement;
+
+    // Hide the textarea initially
+    const textareaSection = document.getElementById('textarea-section') as HTMLDivElement;
+    textareaSection.style.display = 'none';
+
+    // Handle form submission
+    configForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const minChars = parseInt(minInput.value) || 0;
+        const maxChars = parseInt(maxInput.value) || Infinity;
+
+        if (maxChars < minChars) {
+            alert('Maximum characters cannot be less than minimum characters');
+            return;
+        }
+
+        // Hide config form and show textarea
+        configForm.style.display = 'none';
+        textareaSection.style.display = 'block';
+
+        // Initialize the character counter
+        new CharacterCounter('text-input', 'counter', {
+            minLength: minChars,
+            maxLength: maxChars,
+            warnThreshold: 0.8
+        });
+    });
+});
+
 interface CounterOptions {
+    minLength?: number;
     maxLength?: number;
     warnThreshold?: number;
 }
@@ -7,17 +47,28 @@ interface CounterOptions {
 class CharacterCounter {
     private textarea: HTMLTextAreaElement;
     private counter: HTMLElement;
-    private maxLength: number | null;
+    private minLength: number;
+    private maxLength: number;
     private warnThreshold: number;
 
     constructor(textareaId: string, counterId: string, options: CounterOptions = {}) {
         this.textarea = document.getElementById(textareaId) as HTMLTextAreaElement;
         this.counter = document.getElementById(counterId) as HTMLElement;
-        this.maxLength = options.maxLength || null;
-        this.warnThreshold = options.warnThreshold || 0.8; // 80% of maxLength
+        this.minLength = options.minLength || 0;
+        this.maxLength = options.maxLength || Infinity;
+        this.warnThreshold = options.warnThreshold || 0.8;
 
+        this.setupUI();
         this.setupEvents();
         this.updateCounter();
+    }
+
+    private setupUI(): void {
+        // Add helper text showing the limits
+        const limitsInfo = document.createElement('div');
+        limitsInfo.style.marginBottom = '10px';
+        limitsInfo.textContent = `Minimum: ${this.minLength} chars | Maximum: ${this.maxLength === Infinity ? 'none' : this.maxLength} chars`;
+        this.textarea.before(limitsInfo);
     }
 
     private setupEvents(): void {
@@ -28,28 +79,34 @@ class CharacterCounter {
 
     private updateCounter(): void {
         const length = this.textarea.value.length;
-        this.counter.textContent = length.toString();
+        let message = `${length}`;
+        let color = '';
 
-        if (this.maxLength) {
-            const percentage = length / this.maxLength;
+        // Check minimum length
+        if (length < this.minLength) {
+            color = 'red';
+            message += ` (need ${this.minLength - length} more)`;
+        }
+        // Check maximum length
+        else if (length > this.maxLength) {
+            color = 'red';
+            message += ` (${length - this.maxLength} over limit)`;
+        }
+        // Check warning threshold (only if we have a maxLength)
+        else if (this.maxLength !== Infinity && length > this.maxLength * this.warnThreshold) {
+            color = 'orange';
+            const remaining = this.maxLength - length;
+            message += remaining > 0 ? ` (${remaining} remaining)` : '';
+        }
 
-            if (length > this.maxLength) {
-                this.counter.style.color = 'red';
-                this.counter.textContent += ` (${length - this.maxLength} over limit)`;
-            } else if (percentage > this.warnThreshold) {
-                this.counter.style.color = 'orange';
-                this.counter.textContent += ` (${Math.round((1 - percentage) * 100)}% remaining)`;
-            } else {
-                this.counter.style.color = '';
-            }
+        this.counter.textContent = message;
+        this.counter.style.color = color;
+
+        // Optional: Add/remove a class to the textarea based on validation
+        if (length < this.minLength || length > this.maxLength) {
+            this.textarea.classList.add('invalid');
+        } else {
+            this.textarea.classList.remove('invalid');
         }
     }
 }
-
-// Initialize the counter when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new CharacterCounter('text-input', 'counter', {
-        maxLength: 200,      // Optional: set a character limit
-        warnThreshold: 0.75  // Optional: show warning at 75% of max
-    });
-});
