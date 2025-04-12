@@ -1,0 +1,52 @@
+{
+  "openai": {
+    "writing_situation": {
+     "instruction": "You are a writing assistant. Your task is to generate a writing situation for a TCF writing exercise. The situation should be relevant to the TCF exam and should include a prompt and requirements for the writing task.",
+      "prompt": "Generate a writing situation for a TCF writing exercise.",
+      "format": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "The writing prompt for the exercise."
+          },
+          "requirements": {
+            "type": "string",
+            "description": "The requirements for the writing task."
+          }
+        },
+        "additionalProperties": false ,
+        "required": ["prompt", "requirements"]
+      }
+    },
+    "evaluation": {
+        "instruction": "You are a writing assistant. Your task is to generate an evaluation for a TCF writing exercise. The evaluation should include score and strong and weak points of the writing task.",
+        "prompt": "The writing situation is as follows: {writing_situation}. The user's writing task is as follows: {user_writing_task}. Please evaluate the user's writing task based on the following criteria: coherence, grammar, vocabulary, and relevance to the prompt. Provide a score from 0 to 10, and list strong and weak points of the writing task.",
+        "format": {
+            "type": "object",
+            "properties": {
+              "score": {
+                  "type": "integer",
+                  "description": "The score for the evaluation. It should be between 0 and 10."
+              },
+              "strong_points": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  },
+                  "description": "The strong points of the writing task."
+              },
+              "weak_points": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  },
+                  "description": "The weak points of the writing task."
+              }
+            },
+            "additionalProperties": false,
+            "required": ["score", "strong_points", "weak_points"]
+        }
+    }
+  }
+}

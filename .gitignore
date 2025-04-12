@@ -11,4 +11,5 @@ yarn-error.log*
 .vscode/*
 
 .cache/
+src/constants/env.json
 dist/

@@ -7,6 +7,9 @@
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/string-format": "^2.0.3",
+    "dotenv": "^16.5.0",
     "parcel-bundler": "^1.12.5",
     "typescript": "^5.8.3"
   },
@@ -14,5 +17,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "openai": "^4.93.0",
+    "string-format": "^2.0.0"
+  }
 }

@@ -1,79 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expression écrite - TCF Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            padding: 8px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        #textarea-section {
-            margin-top: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .counter {
-            position: sticky;
-            top: 0;
-            background: white;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .invalid {
-            border: 1px solid red;
-        }
-    </style>
+    <title>Aide à la préparation du TCF</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <div id="app">
-    <h1>Test your writing skills for TCF</h1>
+    <h1>Préparation au TCF écrit</h1>
 
-    <form id="config-form">
+    <div id="situation-container" class="card">
+        <h2>Situation d'écriture</h2>
+        <div id="situation-text">Chargement de la situation...</div>
+        <button id="regenerate-btn" class="btn secondary">Générer une nouvelle situation</button>
+    </div>
+
+    <form id="config-form" class="card">
+        <h2>Paramètres</h2>
         <div class="form-group">
-            <label for="min-chars">Minimum Characters:</label>
-            <input type="number" id="min-chars" min="0" value="0">
+            <label for="min-chars">Nombre minimum de caractères:</label>
+            <input type="number" id="min-chars" min="0" value="100">
         </div>
 
         <div class="form-group">
-            <label for="max-chars">Maximum Characters (leave empty for no limit):</label>
-            <input type="number" id="max-chars" min="1">
+            <label for="max-chars">Nombre maximum de caractères (laisser vide pour aucun maximum):</label>
+            <input type="number" id="max-chars" min="1" value="300">
         </div>
 
-        <button type="submit" id="start-btn">Start Counting</button>
+        <button type="submit" id="start-btn" class="btn primary">Commencer l'exercice</button>
     </form>
 
-    <div id="textarea-section">
+    <div id="writing-section" class="card hidden">
         <div class="counter">
-            Character count: <span id="counter">0</span>
+            Compte de caractères: <span id="counter">0</span>
         </div>
-        <textarea id="text-input" placeholder="Start typing here..."></textarea>
+        <textarea id="text-input" placeholder="Écrivez votre texte ici..."></textarea>
+        <button id="submit-btn" class="btn primary">Soumettre pour évaluation</button>
+    </div>
+
+    <div id="result-section" class="card hidden">
+        <h2>Résultat</h2>
+        <div id="score-display"></div>
+        <div id="feedback-text"></div>
+        <button id="restart-btn" class="btn primary">Nouvel exercice</button>
     </div>
 </div>
 
