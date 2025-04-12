@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel src/with_openai/index.html",
+    "start:basic": "parcel src/index.html",
+    "start:config": "parcel src/with_form/index.html",
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
