@@ -3,7 +3,8 @@
 ### Explication
 
 Le test de la langue française TCF (Test de Connaissance du Français) est un examen standardisé qui évalue le niveau de compétence en français des candidats. L'expression écrite est l'une des compétences évaluées dans ce test. Elle consiste à rédiger un texte en réponse à une consigne donnée, en respectant les règles de grammaire, de syntaxe et de vocabulaire.
-Ce projet vise à aider les candidats à se préparer à l'épreuve d'expression écrite du TCF en fournissant un format de test similaire à celui de l'examen officiel. 
+Ce projet vise à aider les candidats à se préparer à l'épreuve d'expression écrite du TCF. 
+Il utilise l'API OpenAI pour générer des sujets d'écriture et fournir des retours sur les textes rédigés par les utilisateurs. L'application permet également de définir un nombre minimum et maximum de mots pour le texte à rédiger.
 
 ### Technologies utilisées
 - Parcel
