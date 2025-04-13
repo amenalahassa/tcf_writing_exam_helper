@@ -7,9 +7,9 @@ Ce projet vise à aider les candidats à se préparer à l'épreuve d'expression
 Il utilise l'API OpenAI pour générer des sujets d'écriture et fournir des retours sur les textes rédigés par les utilisateurs. L'application permet également de définir un nombre minimum et maximum de mots pour le texte à rédiger.
 
 ### Technologies utilisées
-- Parcel
-- Typescript
-- OpenAI API
+- Parcel pour le bundling
+- Typescript pour le typage statique
+- OpenAI API pour la génération de sujets et l'évaluation des textes
 
 ### Utilisation
 1. Clonez le dépôt sur votre machine locale.
