@@ -78,11 +78,11 @@ class CharacterCounter {
     }
 
     private updateCounter(): void {
-        const length = this.textarea.value.length;
+        const length = this.textarea.value.split(/\s+/).filter(word => word.length > 0).length;
         let message = `${length}`;
         let color = '';
 
-        // Check minimum length
+        // Check minimum word count
         if (length < this.minLength) {
             color = 'red';
             message += ` (need ${this.minLength - length} more)`;

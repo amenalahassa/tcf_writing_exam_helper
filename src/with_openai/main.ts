@@ -77,7 +77,7 @@ class TCFWritingHelper {
         const maxChars = maxCharsInput ? parseInt(maxCharsInput) : Infinity;
 
         if (maxChars < minChars) {
-            alert('Le nombre maximum de caractères ne peut pas être inférieur au minimum');
+            alert('Le nombre maximum de mots ne peut pas être inférieur au minimum');
             return;
         }
 
@@ -89,16 +89,16 @@ class TCFWritingHelper {
     }
 
     private updateCounter(): void {
-        const length = this.textarea.value.length;
+        const length = this.textarea.value.split(/\s+/).filter(word => word.length > 0).length;
         let message = `${length}`;
         let color = '';
 
         if (length < this.config.minLength) {
             color = '#e74c3c';
-            message += ` (${this.config.minLength - length} caractères manquants)`;
+            message += ` (${this.config.minLength - length} mots manquants)`;
         } else if (length > this.config.maxLength) {
             color = '#e74c3c';
-            message += ` (${length - this.config.maxLength} caractères en trop)`;
+            message += ` (${length - this.config.maxLength} mots en trop)`;
         } else if (this.config.maxLength !== Infinity && length > this.config.maxLength * 0.8) {
             color = '#f39c12';
             const remaining = this.config.maxLength - length;
@@ -114,12 +114,12 @@ class TCFWritingHelper {
         const text = this.textarea.value.trim();
 
         if (text.length < this.config.minLength) {
-            alert(`Votre texte est trop court. Il doit contenir au moins ${this.config.minLength} caractères.`);
+            alert(`Votre texte est trop court. Il doit contenir au moins ${this.config.minLength} mots.`);
             return;
         }
 
         if (text.length > this.config.maxLength) {
-            alert(`Votre texte est trop long. Il ne doit pas dépasser ${this.config.maxLength} caractères.`);
+            alert(`Votre texte est trop long. Il ne doit pas dépasser ${this.config.maxLength} mots.`);
             return;
         }
 

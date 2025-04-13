@@ -27,7 +27,7 @@ class CharacterCounter {
     }
 
     private updateCounter(): void {
-        const length = this.textarea.value.length;
+        const length = this.textarea.value.split(/\s+/).filter(word => word.length > 0).length;
         this.counter.textContent = length.toString();
 
         if (this.maxLength) {

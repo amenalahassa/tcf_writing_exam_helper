@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expression écrite - TCF Test</title>
+    <title>Expression écrite - Test TCF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,27 +53,27 @@
 </head>
 <body>
 <div id="app">
-    <h1>Test your writing skills for TCF</h1>
+    <h1>Testez vos compétences en écriture pour le TCF</h1>
 
     <form id="config-form">
         <div class="form-group">
-            <label for="min-chars">Minimum Characters:</label>
+            <label for="min-chars">Nombre minimum de mots :</label>
             <input type="number" id="min-chars" min="0" value="0">
         </div>
 
         <div class="form-group">
-            <label for="max-chars">Maximum Characters (leave empty for no limit):</label>
+            <label for="max-chars">Nombre maximum de mots (laisser vide pour aucune limite) :</label>
             <input type="number" id="max-chars" min="1">
         </div>
 
-        <button type="submit" id="start-btn">Start Counting</button>
+        <button type="submit" id="start-btn">Commencer le décompte</button>
     </form>
 
     <div id="textarea-section">
         <div class="counter">
-            Character count: <span id="counter">0</span>
+            Nombre de mots : <span id="counter">0</span>
         </div>
-        <textarea id="text-input" placeholder="Start typing here..."></textarea>
+        <textarea id="text-input" placeholder="Commencez à écrire ici..."></textarea>
     </div>
 </div>
 

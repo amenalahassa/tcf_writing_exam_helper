@@ -19,12 +19,12 @@
     <form id="config-form" class="card">
         <h2>Paramètres</h2>
         <div class="form-group">
-            <label for="min-chars">Nombre minimum de caractères:</label>
+            <label for="min-chars">Nombre minimum de mots:</label>
             <input type="number" id="min-chars" min="0" value="100">
         </div>
 
         <div class="form-group">
-            <label for="max-chars">Nombre maximum de caractères (laisser vide pour aucun maximum):</label>
+            <label for="max-chars">Nombre maximum de mots (laisser vide pour aucun maximum):</label>
             <input type="number" id="max-chars" min="1" value="300">
         </div>
 
@@ -33,7 +33,7 @@
 
     <div id="writing-section" class="card hidden">
         <div class="counter">
-            Compte de caractères: <span id="counter">0</span>
+            Compte de mots: <span id="counter">0</span>
         </div>
         <textarea id="text-input" placeholder="Écrivez votre texte ici..."></textarea>
         <button id="submit-btn" class="btn primary">Soumettre pour évaluation</button>
